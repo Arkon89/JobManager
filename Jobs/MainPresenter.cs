@@ -20,10 +20,15 @@ namespace Jobs
             _view = viev;
             _manager = manager;
             _messageService = service;
-
+            _view.FormActivated += _view_FormActivated;
             _view.JobAddClick += _view_JobAddClick;
             _view.JobDeleteClick += _view_JobDeleteClick;
             
+        }
+
+        private void _view_FormActivated(object sender, EventArgs e)
+        {
+            string[] content = _manager.GetLines(_view.filePath);
         }
 
         private void _view_JobDeleteClick(object sender, EventArgs e)
