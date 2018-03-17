@@ -45,6 +45,7 @@ namespace Jobs
                 }
                 _currentfilepath = filepath;
                 _view.AddTheJob(_view.NewJob);
+                _manager.AddContent(filepath, _view.NewJob);
 
             }
             catch (Exception ex)
