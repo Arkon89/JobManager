@@ -65,22 +65,10 @@ namespace Jobs
         }
 
         public int DeleteJob()
-        {
-            MessageService service = new MessageService();
-            try
-            {                               
-                service.ShowExclamation(listBoxMain.SelectedIndex.ToString());
+        {               
                 int index = listBoxMain.SelectedIndex;
                 listBoxMain.Items.RemoveAt(index);
                 return index;
-                    
-            }
-            catch (Exception ex)
-            {
-                
-                service.ShowError(ex.Message);
-                return -1;
-            }            
         }
 
 

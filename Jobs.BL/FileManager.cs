@@ -44,20 +44,9 @@ namespace Jobs.BL
 
         public void DeleteLine(string path, int pos)
         {
-
-            try
-            {
                 string[] allLines = File.ReadAllLines(path, _defaultEncoding);
                 allLines = allLines.Where(x => x != allLines.ElementAt(pos)).ToArray<string>();
-                File.WriteAllLines(path, allLines, _defaultEncoding);
-                
-            }
-
-            catch (Exception ex)
-            {
-               //MessageService service = new MessageService();
-
-            }
+                File.WriteAllLines(path, allLines, _defaultEncoding);            
         }
 
 

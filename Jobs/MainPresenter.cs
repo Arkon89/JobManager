@@ -39,12 +39,19 @@ namespace Jobs
 
         private void _view_JobDeleteClick(object sender, EventArgs e)
         {
-           _manager.DeleteLine(_view.filePath, _view.DeleteJob());
-            _view.ClearList();
-            string[] content = _manager.GetLines(_view.filePath);
-            foreach (var item in content)
+            try
             {
-                _view.AddTheJob(item);
+                _manager.DeleteLine(_view.filePath, _view.DeleteJob());
+                _view.ClearList();
+                string[] content = _manager.GetLines(_view.filePath);
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item);
+                }
+            }
+            catch(Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
             }
         }
 
