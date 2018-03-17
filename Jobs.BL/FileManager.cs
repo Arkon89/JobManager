@@ -47,7 +47,7 @@ namespace Jobs.BL
 
         public string[] GetLines(string filePath)
         {
-            return File.ReadAllLines(filePath);
+            return File.ReadAllLines(filePath, _defaultEncoding);
         }
 
         
