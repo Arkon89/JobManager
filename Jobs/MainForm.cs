@@ -64,7 +64,23 @@ namespace Jobs
 
         public string DeleteJob()
         {
-            return listBoxMain.SelectedValue.ToString();            
+            MessageService service = new MessageService();
+            try
+            {
+                if (listBoxMain.SelectedValue != null)
+                    return listBoxMain.SelectedValue.ToString();
+                else
+                {
+                    service.ShowExclamation("Чтобы что то удалить, нужно это что то выбрать ");
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                service.ShowError(ex.Message);
+                return "";
+            }            
         }
 
 

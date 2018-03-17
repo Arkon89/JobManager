@@ -38,7 +38,7 @@ namespace Jobs
 
         private void _view_JobDeleteClick(object sender, EventArgs e)
         {
-            
+           _manager.DeleteLine(_view.filePath, _view.DeleteJob());
         }
 
         private void _view_JobAddClick(object sender, EventArgs e)
