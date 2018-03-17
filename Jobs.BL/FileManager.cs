@@ -10,6 +10,7 @@ namespace Jobs.BL
     public interface IFileManager
     {
         bool IsExist(string filePath);
+        void CreateFile(string file);
         string GetContent(string filepath);
         string GetContent(string filePath, Encoding encoding);
         void SaveContent(string content, string filepath);
@@ -25,6 +26,10 @@ namespace Jobs.BL
         {
             bool isExist = File.Exists(filePath);
             return isExist;
+        }
+       public void CreateFile(string file)
+        {
+            File.Create(file);
         }
 
         public string GetContent(string filepath)

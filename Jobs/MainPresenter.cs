@@ -39,8 +39,9 @@ namespace Jobs
                 bool isExist = _manager.IsExist(filepath);
                 if (!isExist)
                 {
-                    _messageService.ShowExclamation("Файл не найден");
-                    return;
+                    //_messageService.ShowExclamation("Файл не найден");
+                    //return;
+                    _manager.CreateFile(filepath);
                 }
                 _currentfilepath = filepath;
                 _view.AddTheJob(_view.NewJob);
