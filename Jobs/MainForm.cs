@@ -67,13 +67,12 @@ namespace Jobs
             MessageService service = new MessageService();
             try
             {
-                if (listBoxMain.SelectedValue != null)
-                    return listBoxMain.SelectedValue.ToString();
-                else
-                {
-                    service.ShowExclamation("Чтобы что то удалить, нужно это что то выбрать ");
-                    return "";
-                }
+                //if (listBoxMain.SelectedIndex != null)
+                    
+                //else
+                
+                    service.ShowExclamation(listBoxMain.SelectedIndex.ToString());
+                    return listBoxMain.SelectedIndex.ToString();
             }
             catch (Exception ex)
             {

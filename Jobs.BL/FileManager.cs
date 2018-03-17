@@ -14,7 +14,7 @@ namespace Jobs.BL
         
         string[] GetLines(string filepath);
         void AddContent(string path, string newString);
-        void DeleteLine(string path, string delString);
+        void DeleteLine(string path, int pos);
     }
 
     public class FileManager: IFileManager
@@ -41,10 +41,10 @@ namespace Jobs.BL
             return File.ReadAllLines(filePath, _defaultEncoding);
         }
 
-        public void DeleteLine(string path, string delString)
+        public void DeleteLine(string path, int pos)
         {
             string[] allLines = File.ReadAllLines(path, _defaultEncoding);
-            allLines = allLines.Where(x => x != delString).ToArray<string>();
+            allLines = allLines.Where(x => x != allLines.ElementAt(pos) ).ToArray<string>();
         }
 
 
