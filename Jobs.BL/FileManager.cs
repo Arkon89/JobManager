@@ -41,7 +41,7 @@ namespace Jobs.BL
             return File.ReadAllLines(filePath, _defaultEncoding);
         }
 
-        void DeleteLine(string path, string delString)
+        public void DeleteLine(string path, string delString)
         {
             string[] allLines = File.ReadAllLines(path, _defaultEncoding);
             allLines = allLines.Where(x => x != delString).ToArray<string>();
