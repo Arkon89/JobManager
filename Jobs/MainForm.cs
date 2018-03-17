@@ -19,7 +19,7 @@ namespace Jobs
         event EventHandler JobDeleteClick;
         event EventHandler FormActivated;
         void AddTheJob(string job);
-        string DeleteJob();
+        int DeleteJob();
 
     }
 
@@ -30,12 +30,13 @@ namespace Jobs
             InitializeComponent();
             btAddJob.Click += BtAddJob_Click;
             btDeleteJob.Click += BtDeleteJob_Click;
-            this.Activated += MainForm_Activated;
+            this.Load += MainForm_Load;
+            
         }
 
 
         #region проброс событий
-        private void MainForm_Activated(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             if (FormActivated != null) FormActivated(this, EventArgs.Empty); 
         }
@@ -62,23 +63,19 @@ namespace Jobs
              get { return fldNewJob.Text; }            
         }
 
-        public string DeleteJob()
+        public int DeleteJob()
         {
             MessageService service = new MessageService();
             try
-            {
-                //if (listBoxMain.SelectedIndex != null)
-                    
-                //else
-                
+            {                               
                     service.ShowExclamation(listBoxMain.SelectedIndex.ToString());
-                    return listBoxMain.SelectedIndex.ToString();
+                    return listBoxMain.SelectedIndex;
             }
             catch (Exception ex)
             {
                 
                 service.ShowError(ex.Message);
-                return "";
+                return -1;
             }            
         }
 

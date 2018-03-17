@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Jobs.BL
 {
     public interface IFileManager
@@ -43,8 +44,19 @@ namespace Jobs.BL
 
         public void DeleteLine(string path, int pos)
         {
-            string[] allLines = File.ReadAllLines(path, _defaultEncoding);
-            allLines = allLines.Where(x => x != allLines.ElementAt(pos) ).ToArray<string>();
+
+            try
+            {
+                string[] allLines = File.ReadAllLines(path, _defaultEncoding);
+                allLines = allLines.Where(x => x != allLines.ElementAt(pos)).ToArray<string>();
+                File.WriteAllLines(path, allLines, _defaultEncoding);
+            }
+
+            catch (Exception ex)
+            {
+               //MessageService service = new MessageService();
+
+            }
         }
 
 

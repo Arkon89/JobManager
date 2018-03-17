@@ -31,6 +31,7 @@ namespace Jobs
             string[] content = _manager.GetLines(_view.filePath);
             foreach (var item in content)
             {
+
                 _view.AddTheJob(item);
             }
             
