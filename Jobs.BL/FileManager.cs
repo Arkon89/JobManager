@@ -50,6 +50,7 @@ namespace Jobs.BL
                 string[] allLines = File.ReadAllLines(path, _defaultEncoding);
                 allLines = allLines.Where(x => x != allLines.ElementAt(pos)).ToArray<string>();
                 File.WriteAllLines(path, allLines, _defaultEncoding);
+                
             }
 
             catch (Exception ex)

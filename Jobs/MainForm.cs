@@ -17,9 +17,10 @@ namespace Jobs
         //List<String> allJobs { get; set; }
         event EventHandler JobAddClick;
         event EventHandler JobDeleteClick;
-        event EventHandler FormActivated;
+        event EventHandler FormLoad;
         void AddTheJob(string job);
         int DeleteJob();
+        void ClearList();
 
     }
 
@@ -38,7 +39,7 @@ namespace Jobs
         #region проброс событий
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (FormActivated != null) FormActivated(this, EventArgs.Empty); 
+            if (FormLoad != null) FormLoad(this, EventArgs.Empty); 
         }
         
         private void BtDeleteJob_Click(object sender, EventArgs e)
@@ -68,8 +69,11 @@ namespace Jobs
             MessageService service = new MessageService();
             try
             {                               
-                    service.ShowExclamation(listBoxMain.SelectedIndex.ToString());
-                    return listBoxMain.SelectedIndex;
+                service.ShowExclamation(listBoxMain.SelectedIndex.ToString());
+                int index = listBoxMain.SelectedIndex;
+                listBoxMain.Items.RemoveAt(index);
+                return index;
+                    
             }
             catch (Exception ex)
             {
@@ -82,7 +86,12 @@ namespace Jobs
 
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
-        public event EventHandler FormActivated;
+        public event EventHandler FormLoad;
+
+        public void ClearList()
+        {
+            listBoxMain.Items.Clear();
+        }
 
         public void AddTheJob(string job)
         {
