@@ -19,17 +19,17 @@ namespace Jobs
     {
         public void ShowMessage(string message)
         {
-            MessageBox.Show(message, "33", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ShowExclamation(string exclamation)
         {
-            MessageBox.Show(exclamation, "33", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show(exclamation, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         public void ShowError(string error)
         {
-            MessageBox.Show(error, "33", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
