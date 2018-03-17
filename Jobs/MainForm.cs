@@ -55,5 +55,9 @@ namespace Jobs
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
         #endregion
+
+        #region собственный код формы
+
+        #endregion
     }
 }
