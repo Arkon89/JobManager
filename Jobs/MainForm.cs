@@ -63,7 +63,7 @@ namespace Jobs
                 
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
-        event EventHandler FormActivated;
+        public event EventHandler FormActivated;
 
         public void AddTheJob(string job)
         {
