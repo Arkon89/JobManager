@@ -43,7 +43,7 @@ namespace Jobs
                     return;
                 }
                 _currentfilepath = filepath;
-                _view.
+                _view.AddTheJob(_view.NewJob);
 
             }
             catch (Exception ex)
