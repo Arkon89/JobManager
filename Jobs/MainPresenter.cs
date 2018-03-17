@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Jobs.BL;
 
+
 namespace Jobs
 {
     class MainPresenter
@@ -68,8 +69,8 @@ namespace Jobs
                     _manager.CreateFile(filepath);
                 }
                 _currentfilepath = filepath;
-                
-                if(_view.NewJob != "")
+
+                if (_view.NewJob == "" || _view.NewJob == " " || _view.NewJob == "  " || _view.NewJob == "   ") return;
                 if(!_manager.AddContent(filepath, _view.NewJob)) return;
                 _view.AddTheJob(_view.NewJob);
 
