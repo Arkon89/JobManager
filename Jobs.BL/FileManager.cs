@@ -33,7 +33,7 @@ namespace Jobs.BL
         }
         public void AddContent(string path, string newString )
         {
-            File.AppendAllText(path, newString, _defaultEncoding);
+            File.AppendAllText(path, newString + "\n", _defaultEncoding);
         }
         public string GetContent(string filepath)
         {
