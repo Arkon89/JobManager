@@ -13,8 +13,7 @@ namespace Jobs.BL
         void CreateFile(string file);
         string GetContent(string filepath);
         string GetContent(string filePath, Encoding encoding);
-        void SaveContent(string content, string filepath);
-        void SaveContent(string content, string filePath, Encoding encoding);
+        string[] GetLines(string filepath);
         void AddContent(string path, string newString);
     }
 
@@ -46,16 +45,12 @@ namespace Jobs.BL
             return content;//
         }
 
-        public void SaveContent(string content ,string filepath)
+        public string[] GetLines(string filePath)
         {
-            SaveContent(content ,filepath, _defaultEncoding);
+            return File.ReadAllLines(filePath);
         }
 
-        public void SaveContent(string content ,string filePath, Encoding encoding)
-        {
-            File.WriteAllText(filePath, content, encoding);
-            
-        }
+        
 
     }
 }
