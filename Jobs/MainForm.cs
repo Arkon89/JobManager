@@ -17,7 +17,7 @@ namespace Jobs
         //List<String> allJobs { get; set; }
         event EventHandler JobAddClick;
         event EventHandler JobDeleteClick;
-        void AddTheJob(string job)
+        void AddTheJob(string job);
 
     }
 
