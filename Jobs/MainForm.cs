@@ -10,11 +10,37 @@ using System.Windows.Forms;
 
 namespace Jobs
 {
-    public partial class MainForm : Form
+    public interface IMainForm
+    {
+        string filePath { get; }
+        string NewJob { get; }
+        //List<String> allJobs { get; set; }
+        event EventHandler JobAddClick;
+        event EventHandler JobDeleteClick;
+
+
+    }
+
+    public partial class MainForm : Form, IMainForm
     {
         public MainForm()
         {
             InitializeComponent();
         }
+
+        public string filePath
+        {
+            get { return "Jobs.txt"; }
+        }
+
+        public string NewJob
+        {
+             get { return fldNewJob.Text; }            
+        }
+
+        
+        public event EventHandler JobAddClick;
+        public event EventHandler JobDeleteClick;
+
     }
 }
