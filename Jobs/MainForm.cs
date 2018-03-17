@@ -17,6 +17,7 @@ namespace Jobs
         //List<String> allJobs { get; set; }
         event EventHandler JobAddClick;
         event EventHandler JobDeleteClick;
+        event EventHandler FormActivated;
         void AddTheJob(string job);
 
     }
@@ -28,9 +29,16 @@ namespace Jobs
             InitializeComponent();
             btAddJob.Click += BtAddJob_Click;
             btDeleteJob.Click += BtDeleteJob_Click;
-            
+            this.Activated += MainForm_Activated;
         }
+
+
         #region проброс событий
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            if (FormActivated != null) FormActivated(this, EventArgs.Empty); 
+        }
+        
         private void BtDeleteJob_Click(object sender, EventArgs e)
         {
             if (JobDeleteClick != null) JobDeleteClick(this, EventArgs.Empty);
@@ -55,7 +63,8 @@ namespace Jobs
                 
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
-        
+        event EventHandler FormActivated;
+
         public void AddTheJob(string job)
         {
             listBoxMain.Items.Add(job);
