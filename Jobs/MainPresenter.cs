@@ -68,9 +68,10 @@ namespace Jobs
                     _manager.CreateFile(filepath);
                 }
                 _currentfilepath = filepath;
-                _view.AddTheJob(_view.NewJob);
+                
                 if(_view.NewJob != "")
-                _manager.AddContent(filepath, _view.NewJob);
+                if(!_manager.AddContent(filepath, _view.NewJob)) return;
+                _view.AddTheJob(_view.NewJob);
 
             }
             catch (Exception ex)

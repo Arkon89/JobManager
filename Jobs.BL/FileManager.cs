@@ -14,7 +14,7 @@ namespace Jobs.BL
         void CreateFile(string file);
         
         string[] GetLines(string filepath);
-        void AddContent(string path, string newString);
+        bool AddContent(string path, string newString);
         void DeleteLine(string path, int pos);
     }
 
@@ -27,19 +27,22 @@ namespace Jobs.BL
             bool isExist = File.Exists(filePath);
             return isExist;
         }
-       public void CreateFile(string file)
+
+        public void CreateFile(string file)
         {
             File.Create(file);
         }
-        public void AddContent(string path, string newString )
+
+        public bool AddContent(string path, string newString )
         {
             var _text = File.ReadAllLines(path, _defaultEncoding);
             foreach (var item in _text)
             {
-                if (item == newString) return;
+                if (item == newString) return false;
             } 
             
             File.AppendAllText(path, newString + "\n", _defaultEncoding);
+            return true;
         }
               
 
