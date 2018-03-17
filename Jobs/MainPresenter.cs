@@ -38,7 +38,7 @@ namespace Jobs
 
         private void _view_JobDeleteClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void _view_JobAddClick(object sender, EventArgs e)

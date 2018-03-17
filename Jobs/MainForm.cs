@@ -19,6 +19,7 @@ namespace Jobs
         event EventHandler JobDeleteClick;
         event EventHandler FormActivated;
         void AddTheJob(string job);
+        string DeleteJob();
 
     }
 
@@ -60,7 +61,13 @@ namespace Jobs
         {
              get { return fldNewJob.Text; }            
         }
-                
+
+        public string DeleteJob()
+        {
+            return listBoxMain.SelectedValue.ToString();            
+        }
+
+
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
         public event EventHandler FormActivated;
