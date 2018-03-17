@@ -26,8 +26,22 @@ namespace Jobs
         public MainForm()
         {
             InitializeComponent();
+            btAddJob.Click += BtAddJob_Click;
+            btDeleteJob.Click += BtDeleteJob_Click;
+        }
+        #region проброс событий
+        private void BtDeleteJob_Click(object sender, EventArgs e)
+        {
+            if (JobDeleteClick != null) JobDeleteClick(this, EventArgs.Empty);
         }
 
+        private void BtAddJob_Click(object sender, EventArgs e)
+        {
+            if (JobAddClick != null) JobAddClick(this, EventArgs.Empty);
+        }
+        #endregion
+
+        #region реализация интерфейса IMaimForm
         public string filePath
         {
             get { return "Jobs.txt"; }
@@ -37,10 +51,9 @@ namespace Jobs
         {
              get { return fldNewJob.Text; }            
         }
-
-        
+                
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
-
+        #endregion
     }
 }
