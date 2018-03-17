@@ -33,6 +33,12 @@ namespace Jobs.BL
         }
         public void AddContent(string path, string newString )
         {
+            var _text = File.ReadAllLines(path, _defaultEncoding);
+            foreach (var item in _text)
+            {
+                if (item == newString) return;
+            } 
+            
             File.AppendAllText(path, newString + "\n", _defaultEncoding);
         }
               
