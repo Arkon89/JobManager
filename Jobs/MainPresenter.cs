@@ -43,7 +43,7 @@ namespace Jobs
                     return;
                 }
                 _currentfilepath = filepath;
-
+                _view.
 
             }
             catch (Exception ex)

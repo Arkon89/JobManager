@@ -17,7 +17,7 @@ namespace Jobs
         //List<String> allJobs { get; set; }
         event EventHandler JobAddClick;
         event EventHandler JobDeleteClick;
-
+        void AddTheJob(string job)
 
     }
 
@@ -28,6 +28,7 @@ namespace Jobs
             InitializeComponent();
             btAddJob.Click += BtAddJob_Click;
             btDeleteJob.Click += BtDeleteJob_Click;
+            
         }
         #region проброс событий
         private void BtDeleteJob_Click(object sender, EventArgs e)
@@ -54,6 +55,12 @@ namespace Jobs
                 
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
+        
+        public void AddTheJob(string job)
+        {
+            listBoxMain.Items.Add(job);
+        }
+        
         #endregion
 
         #region собственный код формы
