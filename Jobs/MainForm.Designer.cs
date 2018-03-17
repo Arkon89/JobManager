@@ -58,8 +58,7 @@
             // 
             // btAddJob
             // 
-            this.btAddJob.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAddJob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btAddJob.Location = new System.Drawing.Point(475, 32);
             this.btAddJob.Name = "btAddJob";
             this.btAddJob.Size = new System.Drawing.Size(94, 23);
@@ -69,8 +68,7 @@
             // 
             // btDeleteJob
             // 
-            this.btDeleteJob.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDeleteJob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btDeleteJob.Location = new System.Drawing.Point(475, 120);
             this.btDeleteJob.Name = "btDeleteJob";
             this.btDeleteJob.Size = new System.Drawing.Size(94, 23);
