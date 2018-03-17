@@ -15,7 +15,7 @@ namespace Jobs.BL
         string GetContent(string filePath, Encoding encoding);
         void SaveContent(string content, string filepath);
         void SaveContent(string content, string filePath, Encoding encoding);
-
+        void AddContent(string path, string newString);
     }
 
     public class FileManager: IFileManager
@@ -31,7 +31,10 @@ namespace Jobs.BL
         {
             File.Create(file);
         }
-
+        public void AddContent(string path, string newString )
+        {
+            File.AppendAllText(path, newString);
+        }
         public string GetContent(string filepath)
         {
             return GetContent(filepath, _defaultEncoding);
