@@ -11,10 +11,10 @@ namespace Jobs.BL
     {
         bool IsExist(string filePath);
         void CreateFile(string file);
-        string GetContent(string filepath);
-        string GetContent(string filePath, Encoding encoding);
+        
         string[] GetLines(string filepath);
         void AddContent(string path, string newString);
+        void DeleteLine(string path, string delString);
     }
 
     public class FileManager: IFileManager
@@ -34,23 +34,19 @@ namespace Jobs.BL
         {
             File.AppendAllText(path, newString + "\n", _defaultEncoding);
         }
-        public string GetContent(string filepath)
-        {
-            return GetContent(filepath, _defaultEncoding);
-        }
-
-        public string GetContent(string filePath, Encoding encoding )
-        {
-            string content = File.ReadAllText(filePath, encoding);
-            return content;//
-        }
+              
 
         public string[] GetLines(string filePath)
         {
             return File.ReadAllLines(filePath, _defaultEncoding);
         }
 
-        
+        void DeleteLine(string path, string delString)
+        {
+            string[] allLines = File.ReadAllLines(path, _defaultEncoding);
+            allLines = allLines.Where(x => x != delString).ToArray<string>();
+        }
+
 
     }
 }
