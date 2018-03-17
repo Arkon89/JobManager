@@ -29,6 +29,11 @@ namespace Jobs
         private void _view_FormActivated(object sender, EventArgs e)
         {
             string[] content = _manager.GetLines(_view.filePath);
+            foreach (var item in content)
+            {
+                _view.AddTheJob(item);
+            }
+            
         }
 
         private void _view_JobDeleteClick(object sender, EventArgs e)
