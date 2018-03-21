@@ -30,11 +30,29 @@ namespace Jobs
 
         private void _view_FormLoad(object sender, EventArgs e)
         {
-            string[] content = _manager.GetLines(_view.filePath);
-            foreach (var item in content)
+            try
             {
-                _view.AddTheJob(item);
+                bool isExist = _manager.IsExist();
+                if (!isExist)
+                {
+                    //_messageService.ShowExclamation("Файл не найден");
+                    //return;
+                    _manager.CreateFile();
+                }
+                else
+                {
+                    string[] content = _manager.GetLines();
+                    foreach (var item in content)
+                    {
+                        _view.AddTheJob(item);
+                    }
+                }
             }
+            catch(Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
+            
             
         }
 
@@ -42,9 +60,9 @@ namespace Jobs
         {
             try
             {
-                _manager.DeleteLine(_view.filePath, _view.DeleteJob());
+                _manager.DeleteLine( _view.DeleteJob());
                 _view.ClearList();
-                string[] content = _manager.GetLines(_view.filePath);
+                string[] content = _manager.GetLines();
                 foreach (var item in content)
                 {
                     _view.AddTheJob(item);
@@ -68,10 +86,10 @@ namespace Jobs
                     //return;
                     _manager.CreateFile();
                 }
-                _currentfilepath = filepath;
+                
 
                 if (String.IsNullOrEmpty(_view.NewJob)) return;
-                if(!_manager.AddContent(filepath, _view.NewJob)) return;
+                if(!_manager.AddContent(_view.NewJob)) return;
                 _view.AddTheJob(_view.NewJob);
 
             }

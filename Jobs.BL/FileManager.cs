@@ -44,27 +44,40 @@ namespace Jobs.BL
 
         public bool AddContent(string newString )
         {
-            var _text = File.ReadAllLines(path, _defaultEncoding);
+            var _text = File.ReadAllLines(filePath, _defaultEncoding);
             foreach (var item in _text)
             {
                 if (item == newString) return false;
             } 
             
-            File.AppendAllText(path, newString + "\n", _defaultEncoding);
+            File.AppendAllText(filePath, newString + "\n", _defaultEncoding);
             return true;
         }
               
 
         public string[] GetLines()
         {
-            return File.ReadAllLines(filePath, _defaultEncoding);
+            var jb =
+                from job in
+                    XDocument.Load(filePath).Descendants("Jobs")
+                select new Job
+                {
+                    Id = (int)job.Attribute("Id"),
+                    JobName = job.Element("JobName").Value.ToString()
+                };
+            List<string> JobList = new List<string>();
+            foreach (var item in jb)
+            {
+                JobList.Add(item.Id.ToString() + "\t" + item.JobName);
+            }
+            return JobList.ToArray<string>();
         }
 
         public void DeleteLine(int pos)
         {
-                string[] allLines = File.ReadAllLines(path, _defaultEncoding);
+                string[] allLines = File.ReadAllLines(filePath, _defaultEncoding);
                 allLines = allLines.Where(x => x != allLines.ElementAt(pos)).ToArray<string>();
-                File.WriteAllLines(path, allLines, _defaultEncoding);            
+                File.WriteAllLines(filePath, allLines, _defaultEncoding);            
         }
 
 
