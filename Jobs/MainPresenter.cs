@@ -70,7 +70,7 @@ namespace Jobs
                 }
                 _currentfilepath = filepath;
 
-                if (_view.NewJob == "" || _view.NewJob == " " || _view.NewJob == "  " || _view.NewJob == "   ") return;
+                if (String.IsNullOrEmpty(_view.NewJob)) return;
                 if(!_manager.AddContent(filepath, _view.NewJob)) return;
                 _view.AddTheJob(_view.NewJob);
 
