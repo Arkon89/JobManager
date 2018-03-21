@@ -12,7 +12,7 @@ namespace Jobs
 {
     public interface IMainForm
     {
-        string filePath { get; }
+        
         string NewJob { get; }
         //List<String> allJobs { get; set; }
         event EventHandler JobAddClick;
@@ -54,10 +54,7 @@ namespace Jobs
         #endregion
 
         #region реализация интерфейса IMaimForm
-        public string filePath
-        {
-            get { return "Jobs.txt"; }
-        }
+        
 
         public string NewJob
         {

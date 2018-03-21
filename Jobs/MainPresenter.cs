@@ -60,13 +60,13 @@ namespace Jobs
         {
             try
             {
-                string filepath = _view.filePath;
-                bool isExist = _manager.IsExist(filepath);
+                
+                bool isExist = _manager.IsExist();
                 if (!isExist)
                 {
                     //_messageService.ShowExclamation("Файл не найден");
                     //return;
-                    _manager.CreateFile(filepath);
+                    _manager.CreateFile();
                 }
                 _currentfilepath = filepath;
 

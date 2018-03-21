@@ -4,36 +4,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace Jobs.BL
 {
     public interface IFileManager
     {
-        bool IsExist(string filePath);
-        void CreateFile(string file);
         
-        string[] GetLines(string filepath);
-        bool AddContent(string path, string newString);
-        void DeleteLine(string path, int pos);
+        bool IsExist();        
+        void CreateFile();
+        string[] GetLines();
+        bool AddContent(string newString);
+        void DeleteLine(int pos);
     }
 
     public class FileManager: IFileManager
     {
+        string filePath = Path.Combine(Environment.CurrentDirectory, "xJobsDoc.xml");
         private readonly Encoding _defaultEncoding = Encoding.GetEncoding(1251);
 
-        public bool IsExist(string filePath)
+        public bool IsExist()
         {
             bool isExist = File.Exists(filePath);
             return isExist;
         }
 
-        public void CreateFile(string file)
+        public void CreateFile()
         {
-            File.Create(file);
-        }
+            var xmlDoc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("Jobs"));
+            foreach (var item in Job.GetAllJobs())
+            {
+                xmlDoc.Root.Add(new XElement("Job", new XAttribute("Id", item.Id),
+                    new XElement("JobName", item.JobName)));
+            }
+            //File.Create(file);
+            xmlDoc.Save(filePath);
+        }       
 
-        public bool AddContent(string path, string newString )
+        public bool AddContent(string newString )
         {
             var _text = File.ReadAllLines(path, _defaultEncoding);
             foreach (var item in _text)
@@ -46,12 +55,12 @@ namespace Jobs.BL
         }
               
 
-        public string[] GetLines(string filePath)
+        public string[] GetLines()
         {
             return File.ReadAllLines(filePath, _defaultEncoding);
         }
 
-        public void DeleteLine(string path, int pos)
+        public void DeleteLine(int pos)
         {
                 string[] allLines = File.ReadAllLines(path, _defaultEncoding);
                 allLines = allLines.Where(x => x != allLines.ElementAt(pos)).ToArray<string>();
