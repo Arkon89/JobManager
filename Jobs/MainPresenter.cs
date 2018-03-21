@@ -30,8 +30,8 @@ namespace Jobs
 
         private void _view_FormLoad(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 bool isExist = _manager.IsExist();
                 if (!isExist)
                 {
@@ -47,11 +47,11 @@ namespace Jobs
                         _view.AddTheJob(item);
                     }
                 }
-            }
-            catch(Exception ex)
-            {
-                _messageService.ShowError(ex.Message);
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    _messageService.ShowError(ex.Message);
+            //}
             
             
         }

@@ -35,7 +35,7 @@ namespace Jobs.BL
             var xmlDoc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("Jobs"));
             foreach (var item in Job.GetAllJobs())
             {
-                xmlDoc.Root.Add(new XElement("Job", new XAttribute("Id", item.Id),
+                xmlDoc.Root.Add(new XElement("Jobb", new XAttribute("Id", item.Id),
                     new XElement("JobName", item.JobName)));
             }
             //File.Create(file);
@@ -56,15 +56,18 @@ namespace Jobs.BL
               
 
         public string[] GetLines()
-        {
-            var jb =
+        {    
+                var jb =
                 from job in
-                    XDocument.Load(filePath).Descendants("Jobs")
+                    XDocument.Load(filePath).Descendants("Jobb")
+                    
                 select new Job
                 {
-                    Id = (int)job.Attribute("Id"),
+                    //Id = (int)Job.Attribute("Id"),
+                    Id = job.HasAttributes? (int)job.Attribute("Id"):0,
                     JobName = job.Element("JobName").Value.ToString()
                 };
+
             List<string> JobList = new List<string>();
             foreach (var item in jb)
             {

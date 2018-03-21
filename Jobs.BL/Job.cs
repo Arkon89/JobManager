@@ -15,7 +15,10 @@ namespace Jobs.BL
         {
             return new List<Job>
             {
-                new Job {Id = 1000, JobName = "сварить кашу" }
+                new Job {Id = 1000, JobName = "сварить кашу" },
+                new Job {Id = 1001, JobName = "покурить" },
+                new Job {Id = 1002, JobName = "выгулять бархана" },
+                new Job {Id = 1003, JobName = "погладить кота" }
             };
         }
     }
