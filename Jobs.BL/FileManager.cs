@@ -44,23 +44,30 @@ namespace Jobs.BL
 
         public bool AddContent(string newString )
         {
-            var _text = File.ReadAllLines(filePath, _defaultEncoding);
-            foreach (var item in _text)
-            {
-                if (item == newString) return false;
-            } 
+            var xmlDoc = XDocument.Load(filePath);
+            var xAtt = xmlDoc.Element("Jobs").Elements().ToArray();
+            int attCount = xAtt.Length;
+            xmlDoc.Element("Jobs").Add(new XElement("Jobb",
+                                        new XAttribute("Id", attCount + 1000 + 1),
+                                        new XElement("JobName", newString)));
             
-            File.AppendAllText(filePath, newString + "\n", _defaultEncoding);
+            ////var _text = File.ReadAllLines(filePath, _defaultEncoding);
+            ////foreach (var item in _text)
+            ////{
+            ////    if (item == newString) return false;
+            ////} 
+
+            ////File.AppendAllText(filePath, newString + "\n", _defaultEncoding);
+            xmlDoc.Save(filePath);
             return true;
         }
-              
+
 
         public string[] GetLines()
         {    
                 var jb =
                 from job in
-                    XDocument.Load(filePath).Descendants("Jobb")
-                    
+                    XDocument.Load(filePath).Descendants("Jobb")                    
                 select new Job
                 {
                     //Id = (int)Job.Attribute("Id"),
