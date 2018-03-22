@@ -77,20 +77,21 @@ namespace Jobs
         private void _view_JobAddClick(object sender, EventArgs e)
         {
             try
-            {
-                
+            {                
                 bool isExist = _manager.IsExist();
                 if (!isExist)
                 {
-                    //_messageService.ShowExclamation("Файл не найден");
-                    //return;
                     _manager.CreateFile();
                 }
-                
 
-                if (String.IsNullOrEmpty(_view.NewJob)) return;
+                if (String.IsNullOrWhiteSpace(_view.NewJob)) return;
                 if(!_manager.AddContent(_view.NewJob)) return;
-                _view.AddTheJob(_view.NewJob);
+                _view.ClearList();
+                string[] content = _manager.GetLines();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item);
+                }
 
             }
             catch (Exception ex)

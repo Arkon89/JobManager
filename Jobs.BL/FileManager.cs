@@ -85,9 +85,13 @@ namespace Jobs.BL
 
         public void DeleteLine(int pos)
         {
-                string[] allLines = File.ReadAllLines(filePath, _defaultEncoding);
-                allLines = allLines.Where(x => x != allLines.ElementAt(pos)).ToArray<string>();
-                File.WriteAllLines(filePath, allLines, _defaultEncoding);            
+            var xmlDoc = XDocument.Load(filePath);
+
+            //xmlDoc.Element("Jobs").Elements("Jobb").Where(x => x.Attribute("Id").Value == (pos + 1000).ToString()).FirstOrDefault().Remove();
+            //xmlDoc.Save(filePath);
+            xmlDoc.Element("Jobs").Elements().ElementAt(pos).Remove();
+            xmlDoc.Save(filePath);
+
         }
 
 
