@@ -18,6 +18,8 @@ namespace Jobs
         event EventHandler JobAddClick;
         event EventHandler JobDeleteClick;
         event EventHandler FormLoad;
+        event EventHandler MovToActualClick;
+        event EventHandler MoveToWorkClick;
         void AddTheJob(string job);
         int DeleteJob();
         void ClearList();
@@ -51,10 +53,21 @@ namespace Jobs
         {
             if (JobAddClick != null) JobAddClick(this, EventArgs.Empty);
         }
+
+        private void butMovToActual_Click(object sender, EventArgs e)
+        {
+            if (MovToActualClick != null) MovToActualClick(this, EventArgs.Empty);
+        }
+
+
+        private void butMoveToWork_Click(object sender, EventArgs e)
+        {
+            if (MoveToWorkClick != null) MoveToWorkClick(this, EventArgs.Empty);
+        }
         #endregion
 
         #region реализация интерфейса IMaimForm
-        
+
 
         public string NewJob
         {
@@ -72,6 +85,8 @@ namespace Jobs
         public event EventHandler JobAddClick;
         public event EventHandler JobDeleteClick;
         public event EventHandler FormLoad;
+        public event EventHandler MovToActualClick;
+        public event EventHandler MoveToWorkClick;
 
         public void ClearList()
         {
@@ -82,11 +97,17 @@ namespace Jobs
         {
             listBoxMain.Items.Add(job);
         }
-        
+
+
+
         #endregion
 
         #region собственный код формы
 
         #endregion
+
+        
+
+        
     }
 }

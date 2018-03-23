@@ -25,7 +25,19 @@ namespace Jobs
             
             _view.JobAddClick += _view_JobAddClick;
             _view.JobDeleteClick += _view_JobDeleteClick;
+            _view.MovToActualClick += _view_MovToActualClick;
+            _view.MoveToWorkClick += _view_MoveToWorkClick;
             
+        }
+
+        private void _view_MoveToWorkClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _view_MovToActualClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void _view_FormLoad(object sender, EventArgs e)
