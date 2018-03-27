@@ -89,10 +89,11 @@ namespace Jobs
                 //_manager.DeleteLine( _view.DeleteJob());
                 _jobManager.DeleteNewJob(_view.DeleteJob());
                 _view.ClearList();
-                string[] content = _manager.GetLines();
+                //string[] content = _manager.GetLines();
+                List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
                 foreach (var item in content)
                 {
-                    _view.AddTheJob(item);
+                    _view.AddTheJob(item.JobName);
                 }
             }
             catch(Exception ex)
