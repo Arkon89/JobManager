@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="FileManager.cs" />
     <Compile Include="Job.cs" />
+    <Compile Include="JobManager.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

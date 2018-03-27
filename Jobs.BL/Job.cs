@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jobs.BL
 {
-    class Job
+    public class Job
     {
         public int Id { get; set; }
         public string JobName { get; set; }
