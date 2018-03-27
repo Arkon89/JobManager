@@ -13,6 +13,7 @@ namespace Jobs
         private readonly IMainForm _view;
         private readonly IFileManager _manager;
         private readonly IMessageService _messageService;
+        private readonly IJobManager _jobManager;
 
         private string _currentfilepath;
 
@@ -85,7 +86,8 @@ namespace Jobs
         {
             try
             {
-                _manager.DeleteLine( _view.DeleteJob());
+                //_manager.DeleteLine( _view.DeleteJob());
+                _jobManager.DeleteNewJob(_view.DeleteJob());
                 _view.ClearList();
                 string[] content = _manager.GetLines();
                 foreach (var item in content)

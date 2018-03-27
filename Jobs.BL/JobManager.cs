@@ -10,7 +10,7 @@ namespace Jobs.BL
     {
         IEnumerable<Job> GetJobList(Job.JStats askStats);
         void AddNewJob(string jName);
-        void DeleteNewJob(string jName);
+        void DeleteNewJob(int jPos);
     }
 
     class JobManager: IJobManager
@@ -45,12 +45,15 @@ namespace Jobs.BL
 
         public void AddNewJob(string jName)
         {
-            AllJobs.Add(new Job { Id = AllJobs.Count + 1001, JobName = jName, JobStatus = Job.JStats.newJob });
+            AllJobs.Add(new Job { Id = AllJobs.Max(x => x.Id) + 1, JobName = jName, JobStatus = Job.JStats.newJob });
         }
 
-        public void DeleteNewJob(string jName)
+        public void DeleteNewJob(int jPos)
         {
-            AllJobs = AllJobs.Where(x => x.JobName != jName).ToList<Job>();
+            //AllJobs = AllJobs.Where(x => x.).ToList<Job>();
+            AllJobs.RemoveAt(jPos);
+            AllJobs.OrderBy(x => x.Id);
+
 
         }
 
