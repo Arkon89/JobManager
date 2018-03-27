@@ -28,14 +28,27 @@ namespace Jobs
             _view.MovToActualClick += _view_MovToActualClick;
             _view.MoveToWorkClick += _view_MoveToWorkClick;
             
+        }        
+
+        private void _view_MovToActualClick(object sender, EventArgs e)
+        {
+            try
+            {
+                _manager.DeleteLine(_view.DeleteJob());
+                _view.ClearList();
+                string[] content = _manager.GetLines();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
         }
 
         private void _view_MoveToWorkClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void _view_MovToActualClick(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
