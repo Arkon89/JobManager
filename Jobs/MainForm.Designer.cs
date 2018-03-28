@@ -257,8 +257,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Список дел";
-            this.Load += new System.EventHandler(this.MainForm_Load_1);
+            this.Text = "Список дел";            
             this.ResumeLayout(false);
             this.PerformLayout();
 

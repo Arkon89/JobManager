@@ -83,17 +83,42 @@ namespace Jobs
                 }
                 else
                 {
-                    string[] content = _manager.GetLines();
-                    //if (_jobManager.GetJobList(Job.JStats.newJob).ToList<Job>() != null)
-                    //{
-                    //    List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
-                    //    if (content != null)
-                    foreach (var item in content)
+                    string[] content1 = _manager.ReadXFile().
+                                                            Where(x => x.JobStatus == Job.JStats.newJob).
+                                                            Select(x => x.JobName).ToArray<string>();                    
+                    foreach (var item in content1)
                             {
                                 _view.AddTheJob(item,1);
-                                //_view.AddTheJob(item.JobName);
+                                _jobManager.AddNewJob(item, 0);                                
                             }
-                    //}
+                    //-----------------------------------
+                    string[] content2 = _manager.ReadXFile().
+                                                            Where(x => x.JobStatus == Job.JStats.actualJob).
+                                                            Select(x => x.JobName).ToArray<string>();
+                    foreach (var item in content2)
+                    {
+                        _view.AddTheJob(item, 2);
+                        _jobManager.AddNewJob(item, 1);
+                    }
+                    //-----------------------------------
+                    string[] content3 = _manager.ReadXFile().
+                                                            Where(x => x.JobStatus == Job.JStats.workJob).
+                                                            Select(x => x.JobName).ToArray<string>();
+                    foreach (var item in content3)
+                    {
+                        _view.AddTheJob(item, 3);
+                        _jobManager.AddNewJob(item, 2);
+                    }
+                    //-----------------------------------
+                    string[] content4 = _manager.ReadXFile().
+                                                            Where(x => x.JobStatus == Job.JStats.readyJob).
+                                                            Select(x => x.JobName).ToArray<string>();
+                    foreach (var item in content4)
+                    {
+                        _view.AddTheJob(item, 4);
+                        _jobManager.AddNewJob(item, 3);
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -136,7 +161,7 @@ namespace Jobs
 
                 if (String.IsNullOrWhiteSpace(_view.NewJob)) return;
                 //if(!_manager.AddContent(_view.NewJob)) return;//запись добавляется здесь
-                if (!_jobManager.AddNewJob(_view.NewJob)) return;
+                if (!_jobManager.AddNewJob(_view.NewJob, 0)) return;
 
                 _view.ClearList(1);
                 //string[] content = _manager.GetLines();

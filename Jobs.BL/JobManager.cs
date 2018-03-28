@@ -9,7 +9,7 @@ namespace Jobs.BL
     public interface IJobManager
     {
         IEnumerable<Job> GetJobList(Job.JStats askStats);
-        bool AddNewJob(string jName);
+        bool AddNewJob(string jName, int jStatus);
         void DeleteNewJob(string jItem);
         List<Job> CreateGeneralList();
         void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo);
@@ -30,9 +30,9 @@ namespace Jobs.BL
             return _ret;
         }
 
-        public bool AddNewJob(string jName)
+        public bool AddNewJob(string jName, int jStatus)
         {
-            AllJobs.Add(new Job { Id = AllJobs.Count < 1 ? 1000 : AllJobs.Max(x => x.Id) + 1, JobName = jName, JobStatus = Job.JStats.newJob });
+            AllJobs.Add(new Job { Id = AllJobs.Count < 1 ? 1000 : AllJobs.Max(x => x.Id) + 1, JobName = jName, JobStatus = (Job.JStats)jStatus });
             return true;
         }
 
@@ -50,7 +50,8 @@ namespace Jobs.BL
 
         public void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo)
         {
-            AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;           
+            //AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;
+            AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Select(x => x.JobStatus = remTo);
         }
     }
 }

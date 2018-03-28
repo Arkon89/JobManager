@@ -15,8 +15,9 @@ namespace Jobs.BL
         bool IsExist();        
         void CreateFile();
         string[] GetLines();
-        bool AddContent(string newString);
+        bool AddContent(string newString, string jStatus);
         void DeleteLine(int pos);
+        List<Job> ReadXFile();
     }
 
     public class FileManager: IFileManager
@@ -42,26 +43,37 @@ namespace Jobs.BL
             xmlDoc.Save(filePath);
         }       
 
-        public bool AddContent(string newString )
+        public bool AddContent(string newString, string jStatus )
         {
             var xmlDoc = XDocument.Load(filePath);
             var xAtt = xmlDoc.Element("Jobs").Elements().ToArray();
             int attCount = xAtt.Length;
-            xmlDoc.Element("Jobs").Add(new XElement("Jobb",
+            xmlDoc.Element("Jobs").Add(new XElement
+                                        ("Jobb",
                                         new XAttribute("Id", attCount + 1000 + 1),
-                                        new XElement("JobName", newString)));
+                                        new XElement("JobName", newString)),
+                                        new XElement("JobStatus", jStatus)
+                                        );
             
-            ////var _text = File.ReadAllLines(filePath, _defaultEncoding);
-            ////foreach (var item in _text)
-            ////{
-            ////    if (item == newString) return false;
-            ////} 
-
-            ////File.AppendAllText(filePath, newString + "\n", _defaultEncoding);
+            
             xmlDoc.Save(filePath);
             return true;
         }
 
+        public List<Job> ReadXFile()
+        {
+            List<Job> _jobs;
+            var _tmp = from job in
+                    XDocument.Load(filePath).Descendants("Jobb")
+                       select new Job
+                       {
+                           Id = job.HasAttributes ? (int)job.Attribute("Id") : 0,
+                           JobName = job.Element("JobName").Value.ToString(),
+                           JobStatus = (Job.JStats)Enum.Parse(typeof(Job.JStats), job.Element("JobStatus").Value)
+                       };
+            _jobs = _tmp.ToList<Job>();            
+            return _jobs;
+        }
 
         public string[] GetLines()
         {    
@@ -69,10 +81,10 @@ namespace Jobs.BL
                 from job in
                     XDocument.Load(filePath).Descendants("Jobb")                    
                 select new Job
-                {
-                    //Id = (int)Job.Attribute("Id"),
+                {                    
                     Id = job.HasAttributes? (int)job.Attribute("Id"):0,
-                    JobName = job.Element("JobName").Value.ToString()
+                    JobName = job.Element("JobName").Value.ToString(),
+                    //JobStatus = (Job.JStats)job.Element("JobStatus").Value
                 };
 
             List<string> JobList = new List<string>();
