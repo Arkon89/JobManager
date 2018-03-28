@@ -34,16 +34,17 @@
             this.btDeleteJob = new System.Windows.Forms.Button();
             this.butMovToActual = new System.Windows.Forms.Button();
             this.butMovToAll = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxActual = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBoxWork = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.listBoxReady = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.butMoveToWork = new System.Windows.Forms.Button();
             this.butReady = new System.Windows.Forms.Button();
             this.butBackToAct = new System.Windows.Forms.Button();
+            this.labelTest = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBoxMain
@@ -108,17 +109,17 @@
             this.butMovToAll.Text = "<= Убрать ";
             this.butMovToAll.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // listBoxActual
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listBoxActual.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(355, 120);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(286, 532);
-            this.listBox1.TabIndex = 0;
+            this.listBoxActual.FormattingEnabled = true;
+            this.listBoxActual.HorizontalScrollbar = true;
+            this.listBoxActual.ItemHeight = 16;
+            this.listBoxActual.Location = new System.Drawing.Point(355, 120);
+            this.listBoxActual.Name = "listBoxActual";
+            this.listBoxActual.Size = new System.Drawing.Size(286, 532);
+            this.listBoxActual.TabIndex = 0;
             // 
             // label1
             // 
@@ -130,7 +131,6 @@
             this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Все дела";
-            
             // 
             // label2
             // 
@@ -143,17 +143,17 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Актуальные";
             // 
-            // listBox2
+            // listBoxWork
             // 
-            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listBoxWork.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.HorizontalScrollbar = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(657, 120);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(285, 532);
-            this.listBox2.TabIndex = 0;
+            this.listBoxWork.FormattingEnabled = true;
+            this.listBoxWork.HorizontalScrollbar = true;
+            this.listBoxWork.ItemHeight = 16;
+            this.listBoxWork.Location = new System.Drawing.Point(657, 120);
+            this.listBoxWork.Name = "listBoxWork";
+            this.listBoxWork.Size = new System.Drawing.Size(285, 532);
+            this.listBoxWork.TabIndex = 0;
             // 
             // label3
             // 
@@ -166,17 +166,17 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "В работе";
             // 
-            // listBox3
+            // listBoxReady
             // 
-            this.listBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listBoxReady.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.HorizontalScrollbar = true;
-            this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(962, 120);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(278, 532);
-            this.listBox3.TabIndex = 0;
+            this.listBoxReady.FormattingEnabled = true;
+            this.listBoxReady.HorizontalScrollbar = true;
+            this.listBoxReady.ItemHeight = 16;
+            this.listBoxReady.Location = new System.Drawing.Point(962, 120);
+            this.listBoxReady.Name = "listBoxReady";
+            this.listBoxReady.Size = new System.Drawing.Size(278, 532);
+            this.listBoxReady.TabIndex = 0;
             // 
             // label4
             // 
@@ -223,11 +223,21 @@
             this.butBackToAct.Text = "<= Убрать ";
             this.butBackToAct.UseVisualStyleBackColor = true;
             // 
+            // labelTest
+            // 
+            this.labelTest.AutoSize = true;
+            this.labelTest.Location = new System.Drawing.Point(524, 36);
+            this.labelTest.Name = "labelTest";
+            this.labelTest.Size = new System.Drawing.Size(46, 17);
+            this.labelTest.TabIndex = 5;
+            this.labelTest.Text = "label5";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1252, 702);
+            this.Controls.Add(this.labelTest);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -240,13 +250,15 @@
             this.Controls.Add(this.btDeleteJob);
             this.Controls.Add(this.btAddJob);
             this.Controls.Add(this.fldNewJob);
-            this.Controls.Add(this.listBox3);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxReady);
+            this.Controls.Add(this.listBoxWork);
+            this.Controls.Add(this.listBoxActual);
             this.Controls.Add(this.listBoxMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Список дел";
-           
+            this.Load += new System.EventHandler(this.MainForm_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,16 +272,17 @@
         private System.Windows.Forms.Button btDeleteJob;
         private System.Windows.Forms.Button butMovToActual;
         private System.Windows.Forms.Button butMovToAll;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxActual;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox listBoxWork;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox listBoxReady;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button butMoveToWork;
         private System.Windows.Forms.Button butReady;
         private System.Windows.Forms.Button butBackToAct;
+        private System.Windows.Forms.Label labelTest;
     }
 }
 

@@ -14,15 +14,18 @@ namespace Jobs
     {
         
         string NewJob { get; }
+        string SelectedJob { get; }
         //List<String> allJobs { get; set; }
         event EventHandler JobAddClick;
         event EventHandler JobDeleteClick;
         event EventHandler FormLoad;
         event EventHandler MovToActualClick;
         event EventHandler MoveToWorkClick;
-        void AddTheJob(string job);
-        int DeleteJob();
-        void ClearList();
+        void AddTheJob(string job, int jobList);
+        string DeleteJob();
+        void ClearList(int jobList);
+
+
 
     }
 
@@ -63,22 +66,34 @@ namespace Jobs
         private void butMoveToWork_Click(object sender, EventArgs e)
         {
             if (MoveToWorkClick != null) MoveToWorkClick(this, EventArgs.Empty);
+            
         }
         #endregion
 
         #region реализация интерфейса IMaimForm
 
+        //public void TestText()
+        //{
+        //    labelTest.Text = listBoxMain.SelectedItem.ToString();  //  <----------
+        //}
 
         public string NewJob
         {
              get { return fldNewJob.Text; }            
         }
 
-        public int DeleteJob()
-        {               
-                int index = listBoxMain.SelectedIndex;
-                listBoxMain.Items.RemoveAt(index);
-                return index;
+        public string SelectedJob
+        {
+            get { return listBoxMain.SelectedItem.ToString(); }
+        }
+
+        public string DeleteJob()
+        {
+            //int index = listBoxMain.SelectedIndex;
+            //listBoxMain.Items.RemoveAt(index);
+            string _item = listBoxMain.SelectedItem.ToString();
+            listBoxMain.Items.Remove(listBoxMain.SelectedItem);
+                return _item;
         }
 
 
@@ -88,15 +103,52 @@ namespace Jobs
         public event EventHandler MovToActualClick;
         public event EventHandler MoveToWorkClick;
 
-        public void ClearList()
+        public void ClearList(int jobList)
         {
-            listBoxMain.Items.Clear();
+            switch (jobList)
+            {
+                case 1:
+                    listBoxMain.Items.Clear();
+                    break;
+                case 2:
+                    listBoxActual.Items.Clear();
+                    break;
+                case 3:
+                    listBoxWork.Items.Clear();
+                    break;
+                case 4:
+                    listBoxReady.Items.Clear();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
-        public void AddTheJob(string job)
+        public void AddTheJob(string job, int jobList)
         {
-            listBoxMain.Items.Add(job);
+            switch (jobList)
+            {
+                case 1:
+                    listBoxMain.Items.Add(job);
+                    break;
+                case 2:
+                    listBoxActual.Items.Add(job);
+                    break;
+                case 3:
+                    listBoxWork.Items.Add(job);
+                    break;
+                case 4:
+                    listBoxReady.Items.Add(job);
+                    break;
+                default:
+                    break;
+            }
+            
         }
+
+
+
 
 
 
@@ -106,8 +158,9 @@ namespace Jobs
 
         #endregion
 
-        
+        private void MainForm_Load_1(object sender, EventArgs e)
+        {
 
-        
+        }
     }
 }

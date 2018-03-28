@@ -21,8 +21,9 @@ namespace Jobs
             MainForm form = new MainForm();
             MessageService service = new MessageService();
             FileManager manager = new FileManager();
+            JobManager jobManager = new JobManager();
 
-            MainPresenter presenter = new MainPresenter(form, manager, service);
+            MainPresenter presenter = new MainPresenter(form, manager, service, jobManager);
             Application.Run(form);
         }
     }

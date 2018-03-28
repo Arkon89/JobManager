@@ -15,12 +15,13 @@ namespace Jobs
         private readonly IMessageService _messageService;
         private readonly IJobManager _jobManager;
 
-        private string _currentfilepath;
+        
 
-        public MainPresenter(IMainForm viev, IFileManager manager, IMessageService service)
+        public MainPresenter(IMainForm viev, IFileManager manager, IMessageService service, IJobManager jobManager)
         {
             _view = viev;
             _manager = manager;
+            _jobManager = jobManager;
             _messageService = service;
             _view.FormLoad += _view_FormLoad;
             
@@ -35,13 +36,25 @@ namespace Jobs
         {
             try
             {
-                _manager.DeleteLine(_view.DeleteJob());
-                _view.ClearList();
-                string[] content = _manager.GetLines();
+                //_manager.DeleteLine(_view.DeleteJob());
+                _jobManager.RemoveFromTo(Job.JStats.newJob, _view.SelectedJob, Job.JStats.actualJob);
+                _view.ClearList(1);
+                List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
                 foreach (var item in content)
                 {
-                    _view.AddTheJob(item);
+                    _view.AddTheJob(item.JobName, 1);
                 }
+                _view.ClearList(2);
+                content = _jobManager.GetJobList(Job.JStats.actualJob).ToList<Job>();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item.JobName, 2);
+                }
+                ////string[] content = _manager.GetLines();
+                ////foreach (var item in content)
+                ////{
+                ////    _view.AddTheJob(item);
+                ////}
             }
             catch (Exception ex)
             {
@@ -51,13 +64,16 @@ namespace Jobs
 
         private void _view_MoveToWorkClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
+            throw new NotImplementedException();  
         }
 
         private void _view_FormLoad(object sender, EventArgs e)
         {
-            //try
-            //{
+            //при загрузке формы - из файла грузится только первый столбец. 
+            //    Это неободимо исправить
+            try
+            {
                 bool isExist = _manager.IsExist();
                 if (!isExist)
                 {
@@ -68,18 +84,24 @@ namespace Jobs
                 else
                 {
                     string[] content = _manager.GetLines();
+                    //if (_jobManager.GetJobList(Job.JStats.newJob).ToList<Job>() != null)
+                    //{
+                    //    List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
+                    //    if (content != null)
                     foreach (var item in content)
-                    {
-                        _view.AddTheJob(item);
-                    }
+                            {
+                                _view.AddTheJob(item,1);
+                                //_view.AddTheJob(item.JobName);
+                            }
+                    //}
                 }
-            //}
-            //catch(Exception ex)
-            //{
-            //    _messageService.ShowError(ex.Message);
-            //}
-            
-            
+            }
+            catch (Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
+
+
         }
 
         private void _view_JobDeleteClick(object sender, EventArgs e)
@@ -88,12 +110,12 @@ namespace Jobs
             {
                 //_manager.DeleteLine( _view.DeleteJob());
                 _jobManager.DeleteNewJob(_view.DeleteJob());
-                _view.ClearList();
+                _view.ClearList(1);
                 //string[] content = _manager.GetLines();
                 List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
                 foreach (var item in content)
                 {
-                    _view.AddTheJob(item.JobName);
+                    _view.AddTheJob(item.JobName, 1);
                 }
             }
             catch(Exception ex)
@@ -105,7 +127,7 @@ namespace Jobs
         private void _view_JobAddClick(object sender, EventArgs e)
         {
             try
-            {                
+            {
                 bool isExist = _manager.IsExist();
                 if (!isExist)
                 {
@@ -113,12 +135,15 @@ namespace Jobs
                 }
 
                 if (String.IsNullOrWhiteSpace(_view.NewJob)) return;
-                if(!_manager.AddContent(_view.NewJob)) return;
-                _view.ClearList();
-                string[] content = _manager.GetLines();
+                //if(!_manager.AddContent(_view.NewJob)) return;//запись добавляется здесь
+                if (!_jobManager.AddNewJob(_view.NewJob)) return;
+
+                _view.ClearList(1);
+                //string[] content = _manager.GetLines();
+                List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
                 foreach (var item in content)
                 {
-                    _view.AddTheJob(item);
+                    _view.AddTheJob(item.JobName, 1);
                 }
 
             }

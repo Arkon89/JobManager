@@ -9,53 +9,48 @@ namespace Jobs.BL
     public interface IJobManager
     {
         IEnumerable<Job> GetJobList(Job.JStats askStats);
-        void AddNewJob(string jName);
-        void DeleteNewJob(int jPos);
+        bool AddNewJob(string jName);
+        void DeleteNewJob(string jItem);
+        List<Job> CreateGeneralList();
+        void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo);
     }
 
-    class JobManager: IJobManager
+        public class JobManager: IJobManager
     {
-        List<Job> AllJobs = new List<Job>();
+        List<Job> AllJobs = new List<Job> { new Job { Id = 1000, JobName = "тестовая запись", JobStatus =Job.JStats.newJob } };
         List<Job> ActualJobs = new List<Job>();
         List<Job> WorkJobs = new List<Job>();
         List<Job> ReadyJobs = new List<Job>();
+        List<Job> GeneralJobList = new List<Job>();
 
         public IEnumerable<Job> GetJobList(Job.JStats askStats)
         {
-            switch (askStats)
-            {
-                case Job.JStats.newJob:
-                    return AllJobs;
-                    //break;
-                case Job.JStats.actualJob:
-                    return ActualJobs;
-                    //break;
-                case Job.JStats.workJob:
-                    return WorkJobs;
-                    //break;
-                case Job.JStats.readyJob:
-                    return ReadyJobs;
-                    //break;
-
-                default:
-                    return new List<Job>();
-                    //break;
-            }
+            List<Job> _ret;
+            _ret = AllJobs.Where(x => x.JobStatus == askStats).ToList<Job>();
+            return _ret;
         }
 
-        public void AddNewJob(string jName)
+        public bool AddNewJob(string jName)
         {
-            AllJobs.Add(new Job { Id = AllJobs.Max(x => x.Id) + 1, JobName = jName, JobStatus = Job.JStats.newJob });
+            AllJobs.Add(new Job { Id = AllJobs.Count < 1 ? 1000 : AllJobs.Max(x => x.Id) + 1, JobName = jName, JobStatus = Job.JStats.newJob });
+            return true;
         }
 
-        public void DeleteNewJob(int jPos)
+        public void DeleteNewJob(string jItem)
         {
-            //AllJobs = AllJobs.Where(x => x.).ToList<Job>();
-            AllJobs.RemoveAt(jPos);
+            AllJobs = AllJobs.Where(x => x.JobName != jItem && x.JobStatus == Job.JStats.newJob).ToList<Job>();
             AllJobs.OrderBy(x => x.Id);
-
-
         }
 
+        public List<Job> CreateGeneralList()
+        {
+            GeneralJobList = AllJobs.Concat(ActualJobs).Concat(WorkJobs).Concat(ReadyJobs).ToList<Job>();
+            return GeneralJobList;
+        }
+
+        public void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo)
+        {
+            AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;           
+        }
     }
 }
