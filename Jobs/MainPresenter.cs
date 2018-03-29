@@ -29,8 +29,33 @@ namespace Jobs
             _view.JobDeleteClick += _view_JobDeleteClick;
             _view.MovToActualClick += _view_MovToActualClick;
             _view.MoveToWorkClick += _view_MoveToWorkClick;
+            _view.MoveToReadyClick += _view_MoveToReadyClick;
             
-        }        
+        }
+
+        private void _view_MoveToReadyClick(object sender, EventArgs e)
+        {
+            try
+            {
+                _jobManager.RemoveFromTo(Job.JStats.workJob, _view.SelectedJob, Job.JStats.readyJob);
+                _view.ClearList(3);
+                List<Job> content = _jobManager.GetJobList(Job.JStats.workJob).ToList<Job>();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item.JobName, 3);
+                }
+                _view.ClearList(4);
+                content = _jobManager.GetJobList(Job.JStats.readyJob).ToList<Job>();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item.JobName, 4);
+                }
+            }
+            catch (Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
+        }
 
         private void _view_MovToActualClick(object sender, EventArgs e)
         {
@@ -58,7 +83,28 @@ namespace Jobs
 
         private void _view_MoveToWorkClick(object sender, EventArgs e)
         {
-
+            try
+            {
+                List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
+                content = _jobManager.GetJobList(Job.JStats.actualJob).ToList<Job>();
+                //_jobManager.RemoveFromTo(Job.JStats.newJob, _view.SelectedJob, Job.JStats.actualJob);
+                //_view.ClearList(1);
+                ////List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
+                //foreach (var item in content)
+                //{
+                //    _view.AddTheJob(item.JobName, 1);
+                //}
+                //_view.ClearList(2);
+                //content = _jobManager.GetJobList(Job.JStats.actualJob).ToList<Job>();
+                //foreach (var item in content)
+                //{
+                //    _view.AddTheJob(item.JobName, 2);
+                //}
+            }
+            catch (Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
             try
             {
                 _jobManager.RemoveFromTo(Job.JStats.actualJob, _view.SelectedJob, Job.JStats.workJob);

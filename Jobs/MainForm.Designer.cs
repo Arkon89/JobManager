@@ -211,6 +211,7 @@
             this.butReady.TabIndex = 3;
             this.butReady.Text = "ГОТОВО =>";
             this.butReady.UseVisualStyleBackColor = true;
+            this.butReady.Click += new System.EventHandler(this.butReady_Click);
             // 
             // butBackToAct
             // 
@@ -257,7 +258,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Список дел";            
+            this.Text = "Список дел";
             this.ResumeLayout(false);
             this.PerformLayout();
 

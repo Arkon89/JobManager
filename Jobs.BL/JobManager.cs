@@ -10,18 +10,14 @@ namespace Jobs.BL
     {
         IEnumerable<Job> GetJobList(Job.JStats askStats);
         bool AddNewJob(string jName, int jStatus);
-        void DeleteNewJob(string jItem);
-        List<Job> CreateGeneralList();
+        void DeleteNewJob(string jItem);        
         void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo);
     }
 
         public class JobManager: IJobManager
     {
         List<Job> AllJobs = new List<Job> { new Job { Id = 1000, JobName = "тестовая запись", JobStatus =Job.JStats.newJob } };
-        List<Job> ActualJobs = new List<Job>();
-        List<Job> WorkJobs = new List<Job>();
-        List<Job> ReadyJobs = new List<Job>();
-        List<Job> GeneralJobList = new List<Job>();
+        
 
         public IEnumerable<Job> GetJobList(Job.JStats askStats)
         {
@@ -42,11 +38,7 @@ namespace Jobs.BL
             AllJobs.OrderBy(x => x.Id);
         }
 
-        public List<Job> CreateGeneralList()
-        {
-            GeneralJobList = AllJobs.Concat(ActualJobs).Concat(WorkJobs).Concat(ReadyJobs).ToList<Job>();
-            return GeneralJobList;
-        }
+        
 
         public void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo)
         {

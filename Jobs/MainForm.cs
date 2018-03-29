@@ -21,6 +21,7 @@ namespace Jobs
         event EventHandler FormLoad;
         event EventHandler MovToActualClick;
         event EventHandler MoveToWorkClick;
+        event EventHandler MoveToReadyClick;
         void AddTheJob(string job, int jobList);
         string DeleteJob();
         void ClearList(int jobList);
@@ -65,8 +66,12 @@ namespace Jobs
 
         private void butMoveToWork_Click(object sender, EventArgs e)
         {
-            if (MoveToWorkClick != null) MoveToWorkClick(this, EventArgs.Empty);
-            
+            if (MoveToWorkClick != null) MoveToWorkClick(this, EventArgs.Empty);            
+        }
+
+        private void butReady_Click(object sender, EventArgs e)
+        {
+            if (MoveToReadyClick != null) MoveToReadyClick(this, EventArgs.Empty);
         }
         #endregion
 
@@ -81,10 +86,20 @@ namespace Jobs
         {
              get { return fldNewJob.Text; }            
         }
-
+        string x = "";
+        
         public string SelectedJob
         {
-            get { return listBoxMain.SelectedItem.ToString(); }
+            get
+            {
+                //listBoxMain.SelectedItem != null ? x = listBoxMain.SelectedItem.ToString() :
+                //   listBoxActual.SelectedItem != null ? x = listBoxActual.SelectedItem.ToString() :
+                //        listBoxWork.SelectedItem != null ? x = listBoxWork.SelectedItem.ToString() : x = y;
+                if (listBoxMain.SelectedItem != null) x = listBoxMain.SelectedItem.ToString();
+                if (listBoxActual.SelectedItem != null) x = listBoxActual.SelectedItem.ToString();
+                if (listBoxWork.SelectedItem != null) x = listBoxWork.SelectedItem.ToString();
+                return x;
+            }
         }
 
         public string DeleteJob()
@@ -102,6 +117,7 @@ namespace Jobs
         public event EventHandler FormLoad;
         public event EventHandler MovToActualClick;
         public event EventHandler MoveToWorkClick;
+        public event EventHandler MoveToReadyClick;
 
         public void ClearList(int jobList)
         {
@@ -146,6 +162,7 @@ namespace Jobs
             }
             
         }
+
 
 
 
