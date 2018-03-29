@@ -34,14 +34,16 @@ namespace Jobs.BL
 
         public void DeleteNewJob(string jItem)
         {
-            AllJobs = AllJobs.Where(x => x.JobName != jItem && x.JobStatus == Job.JStats.newJob).ToList<Job>();
-            AllJobs.OrderBy(x => x.Id);
+            if (jItem != "Null")
+                AllJobs = AllJobs.Where(x => x.JobName != jItem && x.JobStatus == Job.JStats.newJob).OrderBy(x => x.Id).ToList<Job>();
+            //AllJobs.OrderBy(x => x.Id);
         }
 
         
 
         public void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo)
         {
+            if(fromItem != "Null")
             AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;            
         }
     }

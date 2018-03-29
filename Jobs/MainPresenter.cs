@@ -131,29 +131,7 @@ namespace Jobs
         }
 
         private void _view_MoveToWorkClick(object sender, EventArgs e)
-        {
-            try
-            {
-                List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
-                content = _jobManager.GetJobList(Job.JStats.actualJob).ToList<Job>();
-                //_jobManager.RemoveFromTo(Job.JStats.newJob, _view.SelectedJob, Job.JStats.actualJob);
-                //_view.ClearList(1);
-                ////List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
-                //foreach (var item in content)
-                //{
-                //    _view.AddTheJob(item.JobName, 1);
-                //}
-                //_view.ClearList(2);
-                //content = _jobManager.GetJobList(Job.JStats.actualJob).ToList<Job>();
-                //foreach (var item in content)
-                //{
-                //    _view.AddTheJob(item.JobName, 2);
-                //}
-            }
-            catch (Exception ex)
-            {
-                _messageService.ShowError(ex.Message);
-            }
+        {            
             try
             {
                 _jobManager.RemoveFromTo(Job.JStats.actualJob, _view.SelectedJob, Job.JStats.workJob);

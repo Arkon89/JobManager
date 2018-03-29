@@ -98,7 +98,7 @@ namespace Jobs
         {
              get { return fldNewJob.Text; }            
         }
-        string x = "";
+        
         
         public string SelectedJob
         {
@@ -107,20 +107,27 @@ namespace Jobs
                 //listBoxMain.SelectedItem != null ? x = listBoxMain.SelectedItem.ToString() :
                 //   listBoxActual.SelectedItem != null ? x = listBoxActual.SelectedItem.ToString() :
                 //        listBoxWork.SelectedItem != null ? x = listBoxWork.SelectedItem.ToString() : x = y;
-                if (listBoxMain.SelectedItem != null) x = listBoxMain.SelectedItem.ToString();
-                if (listBoxActual.SelectedItem != null) x = listBoxActual.SelectedItem.ToString();
-                if (listBoxWork.SelectedItem != null) x = listBoxWork.SelectedItem.ToString();
-                return x;
+                if (listBoxMain.SelectedItem != null) return listBoxMain.SelectedItem.ToString();
+                if (listBoxActual.SelectedItem != null) return listBoxActual.SelectedItem.ToString();
+                if (listBoxWork.SelectedItem != null) return listBoxWork.SelectedItem.ToString();
+                return  "Null";
+
             }
         }
 
         public string DeleteJob()
         {
-            //int index = listBoxMain.SelectedIndex;
-            //listBoxMain.Items.RemoveAt(index);
-            string _item = listBoxMain.SelectedItem.ToString();
-            listBoxMain.Items.Remove(listBoxMain.SelectedItem);
+            if (listBoxMain.SelectedItem != null)
+            {
+                string _item = listBoxMain.SelectedItem.ToString();
+                listBoxMain.Items.Remove(listBoxMain.SelectedItem);
                 return _item;
+            }
+            else
+            {
+                string _item = "Null";
+                return _item;
+            }
         }
 
 
