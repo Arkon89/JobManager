@@ -108,6 +108,7 @@
             this.butMovToAll.TabIndex = 3;
             this.butMovToAll.Text = "<= Убрать ";
             this.butMovToAll.UseVisualStyleBackColor = true;
+            this.butMovToAll.Click += new System.EventHandler(this.butMovToAll_Click);
             // 
             // listBoxActual
             // 
@@ -223,6 +224,7 @@
             this.butBackToAct.TabIndex = 3;
             this.butBackToAct.Text = "<= Убрать ";
             this.butBackToAct.UseVisualStyleBackColor = true;
+            this.butBackToAct.Click += new System.EventHandler(this.butBackToAct_Click);
             // 
             // labelTest
             // 

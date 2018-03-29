@@ -22,6 +22,8 @@ namespace Jobs
         event EventHandler MovToActualClick;
         event EventHandler MoveToWorkClick;
         event EventHandler MoveToReadyClick;
+        event EventHandler BackToAllClick;
+        event EventHandler BackToActClick;
         void AddTheJob(string job, int jobList);
         string DeleteJob();
         void ClearList(int jobList);
@@ -73,6 +75,16 @@ namespace Jobs
         {
             if (MoveToReadyClick != null) MoveToReadyClick(this, EventArgs.Empty);
         }
+
+        private void butMovToAll_Click(object sender, EventArgs e)
+        {
+            if (BackToAllClick != null) BackToAllClick(this, EventArgs.Empty); 
+        }
+
+        private void butBackToAct_Click(object sender, EventArgs e)
+        {
+            if (BackToActClick != null) BackToActClick(this, EventArgs.Empty);
+        }
         #endregion
 
         #region реализация интерфейса IMaimForm
@@ -118,7 +130,8 @@ namespace Jobs
         public event EventHandler MovToActualClick;
         public event EventHandler MoveToWorkClick;
         public event EventHandler MoveToReadyClick;
-
+        public event EventHandler BackToAllClick;
+        public event EventHandler BackToActClick;
         public void ClearList(int jobList)
         {
             switch (jobList)
@@ -162,6 +175,8 @@ namespace Jobs
             }
             
         }
+
+
 
 
 
