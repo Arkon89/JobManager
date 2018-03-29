@@ -44,7 +44,7 @@
             this.butMoveToWork = new System.Windows.Forms.Button();
             this.butReady = new System.Windows.Forms.Button();
             this.butBackToAct = new System.Windows.Forms.Button();
-            this.labelTest = new System.Windows.Forms.Label();
+            this.butSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxMain
@@ -226,21 +226,22 @@
             this.butBackToAct.UseVisualStyleBackColor = true;
             this.butBackToAct.Click += new System.EventHandler(this.butBackToAct_Click);
             // 
-            // labelTest
+            // butSave
             // 
-            this.labelTest.AutoSize = true;
-            this.labelTest.Location = new System.Drawing.Point(524, 36);
-            this.labelTest.Name = "labelTest";
-            this.labelTest.Size = new System.Drawing.Size(46, 17);
-            this.labelTest.TabIndex = 5;
-            this.labelTest.Text = "label5";
+            this.butSave.Location = new System.Drawing.Point(1115, 31);
+            this.butSave.Name = "butSave";
+            this.butSave.Size = new System.Drawing.Size(104, 23);
+            this.butSave.TabIndex = 5;
+            this.butSave.Text = "Сохранить";
+            this.butSave.UseVisualStyleBackColor = true;
+            this.butSave.Click += new System.EventHandler(this.butSave_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1252, 702);
-            this.Controls.Add(this.labelTest);
+            this.Controls.Add(this.butSave);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -284,7 +285,7 @@
         private System.Windows.Forms.Button butMoveToWork;
         private System.Windows.Forms.Button butReady;
         private System.Windows.Forms.Button butBackToAct;
-        private System.Windows.Forms.Label labelTest;
+        private System.Windows.Forms.Button butSave;
     }
 }
 

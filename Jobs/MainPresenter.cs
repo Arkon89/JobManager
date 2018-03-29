@@ -32,6 +32,19 @@ namespace Jobs
             _view.MoveToReadyClick += _view_MoveToReadyClick;
             _view.BackToAllClick += _view_BackToAllClick;
             _view.BackToActClick += _view_BackToActClick;
+            _view.SaveClick += _view_SaveClick;
+        }
+
+        private void _view_SaveClick(object sender, EventArgs e)
+        {
+            try
+            {
+                _manager.SaveContent(_jobManager.GetAllJobs());
+            }
+            catch (Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
         }
 
         private void _view_BackToActClick(object sender, EventArgs e)

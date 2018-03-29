@@ -12,11 +12,13 @@ namespace Jobs.BL
         bool AddNewJob(string jName, int jStatus);
         void DeleteNewJob(string jItem);        
         void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo);
+        List<Job> GetAllJobs();
     }
 
         public class JobManager: IJobManager
     {
-        List<Job> AllJobs = new List<Job> { new Job { Id = 1000, JobName = "тестовая запись", JobStatus =Job.JStats.newJob } };
+        List<Job> AllJobs = new List<Job>();
+        //{ new Job { Id = 1000, JobName = "тестовая запись", JobStatus =Job.JStats.newJob } };
         
 
         public IEnumerable<Job> GetJobList(Job.JStats askStats)
@@ -46,5 +48,11 @@ namespace Jobs.BL
             if(fromItem != "Null")
             AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;            
         }
+
+        public List<Job> GetAllJobs()
+        {
+            return AllJobs;
+        }
+
     }
 }

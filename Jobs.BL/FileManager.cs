@@ -14,10 +14,11 @@ namespace Jobs.BL
         
         bool IsExist();        
         void CreateFile();
-        string[] GetLines();
+        //string[] GetLines();
         bool AddContent(string newString, string jStatus);
-        void DeleteLine(int pos);
+        //void DeleteLine(int pos);
         List<Job> ReadXFile();
+        bool SaveContent(List<Job> jList);
     }
 
     public class FileManager: IFileManager
@@ -60,11 +61,40 @@ namespace Jobs.BL
             return true;
         }
 
+        public bool SaveContent(List<Job> jList)
+        {
+            var xmlDoc = XDocument.Load(filePath);
+            //var jAtt = xmlDoc.Element("Jobs").Elements().ToArray();
+            
+            //xmlDoc.Element("Jobs").Add(new XElement
+            //                            ("Jobb",
+            //                            new XAttribute("Id", attCount + 1000 + 1),
+            //                            new XElement("JobName", newString)),
+            //                            new XElement("JobStatus", jStatus)
+            //                            );
+            xmlDoc.Root.RemoveAll();
+            for (int i = 0; i < jList.Count; i++)
+            {
+                xmlDoc.Element("Jobs").Add(new XElement
+                                        ("Job",
+                                        new XAttribute("Id", jList.ElementAt(i).Id),
+                                        new XElement("JobName", jList.ElementAt(i).JobName),
+                                        new XElement("JobStatus", jList.ElementAt(i).JobStatus.ToString())
+                                        )
+                                        );
+            }
+            
+
+            xmlDoc.Save(filePath);
+            return true;
+        }
+
+
         public List<Job> ReadXFile()
         {
             List<Job> _jobs;
             var _tmp = from job in
-                    XDocument.Load(filePath).Descendants("Jobb")
+                    XDocument.Load(filePath).Descendants("Job")
                        select new Job
                        {
                            Id = job.HasAttributes ? (int)job.Attribute("Id") : 0,
@@ -75,36 +105,36 @@ namespace Jobs.BL
             return _jobs;
         }
 
-        public string[] GetLines()
-        {    
-                var jb =
-                from job in
-                    XDocument.Load(filePath).Descendants("Jobb")                    
-                select new Job
-                {                    
-                    Id = job.HasAttributes? (int)job.Attribute("Id"):0,
-                    JobName = job.Element("JobName").Value.ToString(),
-                    //JobStatus = (Job.JStats)job.Element("JobStatus").Value
-                };
+        //public string[] GetLines()
+        //{    
+        //        var jb =
+        //        from job in
+        //            XDocument.Load(filePath).Descendants("Jobb")                    
+        //        select new Job
+        //        {                    
+        //            Id = job.HasAttributes? (int)job.Attribute("Id"):0,
+        //            JobName = job.Element("JobName").Value.ToString(),
+        //            //JobStatus = (Job.JStats)job.Element("JobStatus").Value
+        //        };
 
-            List<string> JobList = new List<string>();
-            foreach (var item in jb)
-            {
-                JobList.Add(item.Id.ToString() + "\t" + item.JobName);
-            }
-            return JobList.ToArray<string>();
-        }
+        //    List<string> JobList = new List<string>();
+        //    foreach (var item in jb)
+        //    {
+        //        JobList.Add(item.Id.ToString() + "\t" + item.JobName);
+        //    }
+        //    return JobList.ToArray<string>();
+        //}
 
-        public void DeleteLine(int pos)
-        {
-            var xmlDoc = XDocument.Load(filePath);
+        //public void DeleteLine(int pos)
+        //{
+        //    var xmlDoc = XDocument.Load(filePath);
 
-            //xmlDoc.Element("Jobs").Elements("Jobb").Where(x => x.Attribute("Id").Value == (pos + 1000).ToString()).FirstOrDefault().Remove();
-            //xmlDoc.Save(filePath);
-            xmlDoc.Element("Jobs").Elements().ElementAt(pos).Remove();
-            xmlDoc.Save(filePath);
+        //    //xmlDoc.Element("Jobs").Elements("Jobb").Where(x => x.Attribute("Id").Value == (pos + 1000).ToString()).FirstOrDefault().Remove();
+        //    //xmlDoc.Save(filePath);
+        //    xmlDoc.Element("Jobs").Elements().ElementAt(pos).Remove();
+        //    xmlDoc.Save(filePath);
 
-        }
+        //}
 
 
     }
