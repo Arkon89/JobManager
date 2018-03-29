@@ -35,8 +35,7 @@ namespace Jobs
         private void _view_MovToActualClick(object sender, EventArgs e)
         {
             try
-            {
-                //_manager.DeleteLine(_view.DeleteJob());
+            {                
                 _jobManager.RemoveFromTo(Job.JStats.newJob, _view.SelectedJob, Job.JStats.actualJob);
                 _view.ClearList(1);
                 List<Job> content = _jobManager.GetJobList(Job.JStats.newJob).ToList<Job>();
@@ -49,12 +48,7 @@ namespace Jobs
                 foreach (var item in content)
                 {
                     _view.AddTheJob(item.JobName, 2);
-                }
-                ////string[] content = _manager.GetLines();
-                ////foreach (var item in content)
-                ////{
-                ////    _view.AddTheJob(item);
-                ////}
+                }                
             }
             catch (Exception ex)
             {
@@ -64,8 +58,27 @@ namespace Jobs
 
         private void _view_MoveToWorkClick(object sender, EventArgs e)
         {
-            
-            throw new NotImplementedException();  
+
+            try
+            {
+                _jobManager.RemoveFromTo(Job.JStats.actualJob, _view.SelectedJob, Job.JStats.workJob);
+                _view.ClearList(2);
+                List<Job> content = _jobManager.GetJobList(Job.JStats.actualJob).ToList<Job>();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item.JobName, 2);
+                }
+                _view.ClearList(3);
+                content = _jobManager.GetJobList(Job.JStats.workJob).ToList<Job>();
+                foreach (var item in content)
+                {
+                    _view.AddTheJob(item.JobName, 3);
+                }
+            }
+            catch (Exception ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
         }
 
         private void _view_FormLoad(object sender, EventArgs e)

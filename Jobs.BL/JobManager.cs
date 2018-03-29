@@ -50,8 +50,7 @@ namespace Jobs.BL
 
         public void RemoveFromTo(Job.JStats remFrom, string fromItem, Job.JStats remTo)
         {
-            //AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;
-            AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Select(x => x.JobStatus = remTo);
+            AllJobs.Where(x => x.JobStatus == remFrom && x.JobName == fromItem).Single().JobStatus = remTo;            
         }
     }
 }
